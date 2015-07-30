@@ -1,42 +1,29 @@
 package com.kosaka.luan.timehand;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
+import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.telephony.TelephonyManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
-
-import com.kosaka.luan.timehand.Service.HttpUsuarioExisteSender;
 
 
-public class MainActivity extends Activity {
+public class SemInternet extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
-
-        HttpUsuarioExisteSender usuarioExisteSender = new HttpUsuarioExisteSender(getApplication(), this);
-        usuarioExisteSender.execute(getTelefone());
+        setContentView(R.layout.sem_internet);
     }
 
-    public void clickCadastrar(View view) {
-        startActivity(new Intent(this, CadastroActivity.class));
+    public void clickVoltar(View view) {
+        startActivity(new Intent(this, MainActivity.class));
     }
-
-    public void clickLogin(View view) {
-        startActivity(new Intent(this, HomeActivity.class));
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_sem_internet, menu);
         return true;
     }
 
@@ -53,10 +40,5 @@ public class MainActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    private String getTelefone() {
-        TelephonyManager tMgr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-        return tMgr.getLine1Number();
     }
 }

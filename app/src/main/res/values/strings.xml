@@ -3,4 +3,27 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_home">Home</string>
+    <string name="title_activity_cadastro">CadastroActivity</string>
+
+    <string name="copyright">2015 - Luan Kosaka</string>
+    <string name="subtitulo">Registro e Monitoramento de Ponto</string>
+    <string name="acessar">Acessar</string>
+    <string name="nao_cadastrado">Não sou cadastrado</string>
+    <string name="registrar_ponto">Registrar Ponto</string>
+    <string name="cadastrar">Cadastrar</string>
+    <string name="nome">Nome</string>
+    <string name="email">E-mail</string>
+    <string name="telefone">Telefone</string>
+    <string name="senha">Senha (até 8 caracteres)</string>
+    <string name="voltar">Voltar</string>
+    <string name="sou_cadastrado">Já sou cadastrado</string>
+
+    <string name="email_invalido">Email inválido</string>
+    <string name="preencha_todos_campos">Preencha todos os campos</string>
+    <string name="bem_vindo">Bem Vindo</string>
+
+    <string name="sem_internet">Sem Internet</string>
+    <string name="title_activity_sem_internet">SemInternet</string>
+
+    <string name="tentar_novamente">Tentar Novamente</string>
 </resources>

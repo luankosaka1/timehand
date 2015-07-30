@@ -23,6 +23,14 @@
             android:name=".HomeActivity"
             android:label="@string/title_activity_home" >
         </activity>
+        <activity
+            android:name=".CadastroActivity"
+            android:label="@string/title_activity_cadastro" >
+        </activity>
+        <activity
+            android:name=".SemInternet"
+            android:label="@string/title_activity_sem_internet" >
+        </activity>
     </application>
 
 </manifest>
