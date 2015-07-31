@@ -26,4 +26,9 @@
     <string name="title_activity_sem_internet">SemInternet</string>
 
     <string name="tentar_novamente">Tentar Novamente</string>
+    <string name="telefone_nao_encontrado">Insira o número do telefone cadastrado</string>
+
+    <string name="verificar">Verificar</string>
+
+    <string name="preencher_telefone">Preencha o número do telefone</string>
 </resources>

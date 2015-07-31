@@ -8,20 +8,52 @@ import android.telephony.TelephonyManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.kosaka.luan.timehand.Service.HttpUsuarioExisteSender;
+import com.kosaka.luan.timehand.Service.Util;
 
 
 public class MainActivity extends Activity {
+
+    LinearLayout layoutValidacaoTelefone;
+    EditText inputTelefone;
+
+    private Button btnAcessar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        HttpUsuarioExisteSender usuarioExisteSender = new HttpUsuarioExisteSender(getApplication(), this);
-        usuarioExisteSender.execute(getTelefone());
+        String phoneNumber = Util.getTelefone(getApplicationContext());
+
+        if (phoneNumber.isEmpty()) {
+            if (Util.PHONE_NUMBER.isEmpty()) {
+                layoutValidacaoTelefone = (LinearLayout) findViewById(R.id.layoutValidacaoTelefone);
+                layoutValidacaoTelefone.setVisibility(View.VISIBLE);
+            } else {
+                btnAcessar = (Button) findViewById(R.id.btnAcessar);
+                btnAcessar.setEnabled(true);
+            }
+        } else {
+            HttpUsuarioExisteSender usuarioExisteSender = new HttpUsuarioExisteSender(getApplication(), this);
+            usuarioExisteSender.execute(phoneNumber);
+        }
+    }
+
+    public void clickVerificarTelefone(View view) {
+        inputTelefone = (EditText) findViewById(R.id.inputTelefone);
+
+        if (inputTelefone.getText().toString().isEmpty()) {
+            Toast.makeText(this, getString(R.string.preencher_telefone), Toast.LENGTH_LONG).show();
+        } else {
+            HttpUsuarioExisteSender usuarioExisteSender = new HttpUsuarioExisteSender(getApplication(), this);
+            usuarioExisteSender.execute(inputTelefone.getText().toString());
+        }
     }
 
     public void clickCadastrar(View view) {
@@ -53,10 +85,5 @@ public class MainActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    private String getTelefone() {
-        TelephonyManager tMgr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-        return tMgr.getLine1Number();
     }
 }

@@ -51,10 +51,48 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="30dp"
-                android:gravity="center_horizontal"
                 android:textColor="#000"
                 android:textSize="14dp"
-                android:textStyle="bold|italic" />
+                android:textStyle="bold|italic"
+                android:gravity="center_horizontal" />
+
+            <LinearLayout
+                android:id="@+id/layoutValidacaoTelefone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:visibility="invisible">
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/telefone_nao_encontrado"
+                    android:textColor="#f00" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:id="@+id/inputTelefone"
+                    android:gravity="center_horizontal"
+                    android:inputType="phone"
+                    android:numeric="integer"
+                    android:phoneNumber="true"
+                    android:singleLine="true" />
+
+                <Button
+                    android:onClick="clickVerificarTelefone"
+                    android:id="@+id/button2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/linearLayout2"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/verificar" />
+
+            </LinearLayout>
 
         </LinearLayout>
 

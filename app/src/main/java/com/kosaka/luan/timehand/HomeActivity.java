@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.kosaka.luan.timehand.Service.HttpPontoSender;
 import com.kosaka.luan.timehand.Service.HttpPontosDoDia;
+import com.kosaka.luan.timehand.Service.Util;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -35,14 +36,10 @@ public class HomeActivity extends Activity {
         data.setText(getDataAtual("dd/MM/yyyy"));
 
         editDataAtual = (EditText) findViewById(R.id.editDataAtual);
-        editDataAtual.setText(getDataAtual("H:mm:ss"));
+        editDataAtual.setText(getDataAtual("HH:mm:ss"));
 
         HttpPontosDoDia pontosDoDia = new HttpPontosDoDia(getApplication(), this);
-        pontosDoDia.execute(getTelefone());
-    }
-
-    public static Context getAppContext() {
-        return getAppContext();
+        pontosDoDia.execute(Util.getTelefone(getApplicationContext()));
     }
 
     private String getDataAtual(String format) {
@@ -55,7 +52,7 @@ public class HomeActivity extends Activity {
     public void clickRegistraPonto(View view) {
         String dataAtual = data.getText().toString() + " " + editDataAtual.getText().toString();
         HttpPontoSender http = new HttpPontoSender(getApplication(), view);
-        http.execute(dataAtual, getTelefone());
+        http.execute(dataAtual, Util.getTelefone(getApplicationContext()));
 
         startActivity(new Intent(this, MainActivity.class));
     }
@@ -80,10 +77,5 @@ public class HomeActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    private String getTelefone() {
-        TelephonyManager tMgr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-        return tMgr.getLine1Number();
     }
 }

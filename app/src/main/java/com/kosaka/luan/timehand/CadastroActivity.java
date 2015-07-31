@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.kosaka.luan.timehand.Service.HttpCadastroSender;
+import com.kosaka.luan.timehand.Service.Util;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -28,11 +29,17 @@ public class CadastroActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cadastro);
 
+        String phoneNumber = Util.getTelefone(getApplicationContext());
+
         inputNome = (EditText) findViewById(R.id.inputNome);
         inputEmail = (EditText) findViewById(R.id.inputEmail);
         inputSenha = (EditText) findViewById(R.id.inputSenha);
         inputTelefone = (EditText) findViewById(R.id.inputTelefone);
-        inputTelefone.setText(getTelefone());
+        inputTelefone.setText(phoneNumber);
+
+        if (!phoneNumber.isEmpty()) {
+            inputTelefone.setEnabled(false);
+        }
     }
 
     public boolean isEmailValid(String email) {
@@ -113,27 +120,5 @@ public class CadastroActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    private String getSIM() {
-        TelephonyManager telemamanger = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-        String getSimSerialNumber = telemamanger.getSimSerialNumber();
-        String getSimNumber = telemamanger.getLine1Number();
-
-        if (getSimNumber.isEmpty()) {
-            return getSimSerialNumber;
-        }
-
-        return getSimNumber;
-    }
-
-    private String getIMEI() {
-        TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-        return telephonyManager.getDeviceId();
-    }
-
-    private String getTelefone() {
-        TelephonyManager tMgr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-        return tMgr.getLine1Number();
     }
 }

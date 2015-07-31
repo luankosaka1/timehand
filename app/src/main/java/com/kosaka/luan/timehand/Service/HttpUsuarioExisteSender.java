@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,6 +41,7 @@ public class HttpUsuarioExisteSender extends AsyncTask<String, String, String> {
     private MainActivity view;
     private Button btnAcessar, btnCadastrar;
     private TextView labelBemVindo;
+    private LinearLayout layoutValidacaoTelefone;
 
     public HttpUsuarioExisteSender(Context context, MainActivity view) {
         this.context = context;
@@ -48,6 +50,7 @@ public class HttpUsuarioExisteSender extends AsyncTask<String, String, String> {
         btnAcessar = (Button) view.findViewById(R.id.btnAcessar);
         btnCadastrar = (Button) view.findViewById(R.id.btnCadastrar);
         labelBemVindo = (TextView) view.findViewById(R.id.labelBemVindo);
+        layoutValidacaoTelefone = (LinearLayout) view.findViewById(R.id.layoutValidacaoTelefone);
     }
 
     @Override
@@ -120,6 +123,11 @@ public class HttpUsuarioExisteSender extends AsyncTask<String, String, String> {
                 String telefone = jsonUser.get("telefone").toString();
 
                 labelBemVindo.setText(context.getString(R.string.bem_vindo) + ", " + username + "\n" + telefone);
+
+                layoutValidacaoTelefone.setVisibility(View.INVISIBLE);
+
+                // definir o numero do telefone como variavel global
+                Util.PHONE_NUMBER = telefone;
             }
         } catch (JSONException e) {
             e.printStackTrace();
